@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root{
+    --pb:#C7773E;       /* peanut butter color */
+    --label:#E02C27;    /* red label + lid */
+    --ink:#111;         /* outline text */
+    --bg:#fff;          /* page background */
+    --tick:#ddd;
+    --max-width: 640px;
+  }
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:var(--max-width);margin:2rem auto;padding:0 1rem;text-align:center}
+  h1{margin:.25rem 0 0;font-size:clamp(1.4rem,2.5vw,2rem)}
+  .meta{margin:.25rem 0 1rem;color:#555;font-size:.95rem}
+  .board{display:grid;gap:1rem;align-items:center;justify-items:center}
+  svg{display:block;max-width:420px;width:100%;height:auto}
+  .nums{display:flex;gap:1.25rem;justify-content:center;align-items:baseline;flex-wrap:wrap;margin-top:.25rem}
+  .nums .big{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800}
+  .nums .label{font-size:.9rem;color:#666}
+  .goal-met{display:inline-block;margin-top:.5rem;padding:.4rem .7rem;border:2px solid var(--label);border-radius:.5rem;font-weight:700;color:var(--label)}
+  .ticks{position:relative;width:min(420px,90vw);height:0}
+  .ticks::before, .ticks::after{
+    content:""; position:absolute; left:50%; transform:translateX(-50%);
+    width:min(280px,65vw); height:0; border-top:1px dashed var(--tick);
+  }
+  footer{margin:1.25rem 0 2rem;color:#777;font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 id="title">Collected so far...</h1>
+  <div class="meta" id="updated">Loading…</div>
+
+  <div class="board">
+
+    <!-- LIVE (fillable) JAR -->
+    <figure id="jar-live" aria-label="Fundraiser progress jar">
+      <svg viewBox="0 0 300 420" role="img" aria-labelledby="label1">
+        <title id="label1">Peanut Butter Love Jar</title>
+        <!-- Clip area representing the inner cavity of the jar -->
+        <defs>
+
+          <clipPath id="jar-cavity">
+            <!-- Inner cavity path: a rounded-rectangle-like path -->
+            <path d="
+              M 60 110
+              Q 60 95 80 90
+              H 220
+              Q 240 95 240 110
+              V 360
+              Q 240 375 220 380
+              H 80
+              Q 60 375 60 360
+              Z" />
+          </clipPath>
+        </defs>
+
+        <g id="progress-ticks" stroke="#bbb" stroke-width="1" stroke-linecap="round" fill="none" pointer-events="none">
+
+        <g class="tick" data-p="0.20">
+            <line x1="238" x2="256" y1="0" y2="0" />
+            <text x="262" y="0" alignment-baseline="middle" font-size="12" fill="#666">20%</text>
+        </g>
+        <g class="tick" data-p="0.40">
+            <line x1="238" x2="256" y1="0" y2="0" />
+            <text x="262" y="0" alignment-baseline="middle" font-size="12" fill="#666">40%</text>
+        </g>
+        <g class="tick" data-p="0.60">
+            <line x1="238" x2="256" y1="0" y2="0" />
+            <text x="262" y="0" alignment-baseline="middle" font-size="12" fill="#666">60%</text>
+        </g>
+        <g class="tick" data-p="0.80">
+            <line x1="238" x2="256" y1="0" y2="0" />
+            <text x="262" y="0" alignment-baseline="middle" font-size="12" fill="#666">80%</text>
+        </g>
+        </g>
+
+
+        <!-- Fill rectangle clipped to cavity (height animated by JS) -->
+        <rect id="pb-fill" x="62" y="380" width="176" height="0" fill="var(--pb)" clip-path="url(#jar-cavity)"></rect>
+
+        <!-- Jar outline -->
+        <g fill="none" stroke="var(--ink)" stroke-width="4" stroke-linecap="round">
+          <!-- Lid (red) -->
+          <ellipse cx="150" cy="55" rx="95" ry="25" fill="var(--label)" stroke="var(--ink)"/>
+          <rect x="55" y="55" width="190" height="36" fill="var(--label)" stroke="var(--ink)"/>
+          <!-- Lid ridges -->
+          <g stroke="var(--ink)" stroke-width="2">
+            <line x1="65" y1="55" x2="65" y2="91"/>
+            <line x1="75" y1="55" x2="75" y2="91"/>
+            <line x1="85" y1="55" x2="85" y2="91"/>
+            <line x1="95" y1="55" x2="95" y2="91"/>
+            <line x1="105" y1="55" x2="105" y2="91"/>
+            <line x1="115" y1="55" x2="115" y2="91"/>
+            <line x1="125" y1="55" x2="125" y2="91"/>
+            <line x1="135" y1="55" x2="135" y2="91"/>
+            <line x1="145" y1="55" x2="145" y2="91"/>
+            <line x1="155" y1="55" x2="155" y2="91"/>
+            <line x1="165" y1="55" x2="165" y2="91"/>
+            <line x1="175" y1="55" x2="175" y2="91"/>
+            <line x1="185" y1="55" x2="185" y2="91"/>
+            <line x1="195" y1="55" x2="195" y2="91"/>
+            <line x1="205" y1="55" x2="205" y2="91"/>
+            <line x1="215" y1="55" x2="215" y2="91"/>
+          </g>
+
+          <!-- Jar body outline -->
+          <path d="
+            M 55 91
+            Q 45 110 55 125
+            V 355
+            Q 60 385 100 395
+            H 200
+            Q 240 385 245 355
+            V 125
+            Q 255 110 245 91
+            Z" fill="none" />
+
+          <!-- Lower base line -->
+          <path d="M 75 380 Q 150 405 225 380" />
+
+          <!-- Label (red) -->
+          <rect x="70" y="210" rx="16" ry="16" width="160" height="110" fill="var(--label)" stroke="var(--ink)" stroke-width="3"/>
+        </g>
+
+        <!-- Label text -->
+        <text x="150" y="245" text-anchor="middle" font-size="22" font-weight="800" fill="var(--ink)">PEANUT</text>
+        <text x="150" y="275" text-anchor="middle" font-size="22" font-weight="800" fill="var(--ink)">BUTTER</text>
+        <text x="150" y="305" text-anchor="middle" font-size="22" font-weight="800" fill="var(--ink)">LOVE</text>
+      </svg>
+    </figure>
+
+    <!-- OVERFLOW (pop-top + spill) JAR -->
+    <figure id="jar-overflow" hidden aria-label="Goal met jar">
+      <svg viewBox="0 0 300 460" role="img" aria-labelledby="label2">
+        <title id="label2">Goal Met – Overflow Jar</title>
+
+        <!-- Popped lid (angled) -->
+        <g transform="translate(150,40) rotate(-18) translate(-150,-40)">
+          <ellipse cx="150" cy="40" rx="95" ry="25" fill="var(--label)" stroke="var(--ink)" stroke-width="4"/>
+          <rect x="55" y="40" width="190" height="36" fill="var(--label)" stroke="var(--ink)" stroke-width="4"/>
+          <g stroke="var(--ink)" stroke-width="2">
+            <!-- ridges -->
+            <line x1="65" y1="40" x2="65" y2="76"/>
+            <line x1="75" y1="40" x2="75" y2="76"/>
+            <line x1="85" y1="40" x2="85" y2="76"/>
+            <line x1="95" y1="40" x2="95" y2="76"/>
+            <line x1="105" y1="40" x2="105" y2="76"/>
+            <line x1="115" y1="40" x2="115" y2="76"/>
+            <line x1="125" y1="40" x2="125" y2="76"/>
+            <line x1="135" y1="40" x2="135" y2="76"/>
+            <line x1="145" y1="40" x2="145" y2="76"/>
+            <line x1="155" y1="40" x2="155" y2="76"/>
+            <line x1="165" y1="40" x2="165" y2="76"/>
+            <line x1="175" y1="40" x2="175" y2="76"/>
+            <line x1="185" y1="40" x2="185" y2="76"/>
+            <line x1="195" y1="40" x2="195" y2="76"/>
+            <line x1="205" y1="40" x2="205" y2="76"/>
+            <line x1="215" y1="40" x2="215" y2="76"/>
+          </g>
+        </g>
+
+        <!-- PB spill over rim -->
+        <path d="
+          M 60 110
+          Q 110 85 150 110
+          Q 190 130 240 110
+          Q 235 135 220 150
+          Q 210 160 200 155
+          Q 195 170 180 175
+          Q 165 180 150 170
+          Q 135 185 115 178
+          Q 95 170 90 155
+          Q 75 160 65 148
+          Q 55 136 60 110 Z"
+          fill="var(--pb)" stroke="var(--ink)" stroke-width="3" />
+
+        <!-- Jar body (full of PB) -->
+        <path d="
+          M 55 120
+          V 355
+          Q 60 385 100 395
+          H 200
+          Q 240 385 245 355
+          V 120
+          Z" fill="var(--pb)" stroke="var(--ink)" stroke-width="4"/>
+
+        <!-- Label (red) -->
+        <rect x="70" y="215" rx="16" ry="16" width="160" height="110" fill="var(--label)" stroke="var(--ink)" stroke-width="3"/>
+        <text x="150" y="250" text-anchor="middle" font-size="22" font-weight="800" fill="var(--ink)">PEANUT</text>
+        <text x="150" y="280" text-anchor="middle" font-size="22" font-weight="800" fill="var(--ink)">BUTTER</text>
+        <text x="150" y="310" text-anchor="middle" font-size="22" font-weight="800" fill="var(--ink)">LOVE</text>
+
+        <!-- Base line -->
+        <path d="M 75 380 Q 150 405 225 380" fill="none" stroke="var(--ink)" stroke-width="4"/>
+      </svg>
+    </figure>
+
+    <div class="nums" id="nums">
+      <div><span class="big" id="totalLbs">0</span> <span class="label">of</span>
+      <span class="big" id="goalLbs">0</span> <span class="label">lbs</span><p>
+      <span class="big" id="pct">0%</span> <span class="label">of goal</span></p></div>
+ 
+    </div>
+
+    <div class="goal-met" id="goalTag" style="display:none;">GOAL MET!</div>
+    <div class="ticks" aria-hidden="true"></div>
+  </div>
+
+  <footer>Data updates automatically. 1 entry = 1 lb.</footer>
+</div>
+
+<script>
+const API = "https://script.google.com/macros/s/AKfycbwQReagIwXeUiDMPv2TZamrb3TYz1nonDjMop0x0uQLFXL27-4LfaXkIr5-3gw_qzS1/exec"; 
+const POLL_MS = 60000;               // 60s
+const FILL = document.getElementById('pb-fill');
+const LIVE = document.getElementById('jar-live');
+const OVER = document.getElementById('jar-overflow');
+const totalLbsEl = document.getElementById('totalLbs');
+const pctEl = document.getElementById('pct');
+const goalEl = document.getElementById('goalLbs');
+const updatedEl = document.getElementById('updated');
+const goalTag = document.getElementById('goalTag');
+const titleEl = document.getElementById('title');
+
+// Based on the SVG above: cavity baseline y and usable height
+const TOP_Y = 110;
+const BASELINE_Y = 380;             
+const MAX_HEIGHT = BASELINE_Y - TOP_Y; 
+
+
+let currentProgress = 0;
+
+// Map a 0..1 percentage to a y-coordinate inside the cavity
+function yAt(pct){ 
+  // Uses your existing constants; works whether BASELINE_Y is 365 or 380
+  return BASELINE_Y - pct * (BASELINE_Y - TOP_Y);
+}
+
+function positionTicks(){
+  document.querySelectorAll('#progress-ticks .tick').forEach(g => {
+    const p = parseFloat(g.dataset.p);
+    const y = yAt(p).toFixed(1);
+
+    const line = g.querySelector('line');
+    const text = g.querySelector('text');
+
+    line.setAttribute('y1', y);
+    line.setAttribute('y2', y);
+    text.setAttribute('y', y);
+  });
+}
+
+
+
+
+function fmtPct(p){ return Math.round(Math.max(0, p) * 100); }
+function clamp01(x){ return Math.max(0, Math.min(1, x)); }
+
+function drawFill(targetProgress){
+  targetProgress = clamp01(targetProgress);
+  // animate toward target
+  const start = performance.now();
+  const startP = currentProgress;
+  const delta = targetProgress - startP;
+  const dur = 650; // ms
+
+  function tick(t){
+    const e = Math.min(1, (t - start) / dur);
+    const p = startP + delta * (0.5 - Math.cos(Math.PI*e)/2); // ease-in-out
+    const h = p * MAX_HEIGHT;
+    FILL.setAttribute('height', h.toFixed(2));
+    FILL.setAttribute('y', (BASELINE_Y - h).toFixed(2));
+    if (e < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      currentProgress = targetProgress;
+    }
+  }
+  requestAnimationFrame(tick);
+}
+
+async function fetchData(){
+  try{
+    const res = await fetch(API + '?t=' + Date.now(), { cache: 'no-store' });
+    const j = await res.json();
+    // Update text
+    const goal = Number(j.goal_lbs || 0);
+    const total = Number(j.total_lbs || 0);
+    const progress = goal > 0 ? total/goal : 0;
+
+    totalLbsEl.textContent = (Math.round(total * 10)/10).toString();
+    goalEl.textContent = (Math.round(goal * 10)/10).toString();
+    pctEl.textContent = fmtPct(progress) + '%';
+    updatedEl.textContent = 'Updated ' + new Date(j.updated || Date.now()).toLocaleString();
+
+    if (progress >= 1){
+      // Swap to overflow and stop animating further
+      LIVE.hidden = true;
+      OVER.hidden = false;
+      goalTag.style.display = '';
+      if (poller){ clearInterval(poller); poller = null; }
+    } else {
+      // Ensure live view visible + animate
+      goalTag.style.display = 'none';
+      OVER.hidden = true;
+      LIVE.hidden = false;
+      drawFill(progress);
+    }
+
+  }catch(err){
+    updatedEl.textContent = 'Error loading data. Retrying…';
+    console.error(err);
+  }
+}
+
+// First paint: quick from localStorage if you want (skipped for simplicity)
+positionTicks();
+fetchData();
+let poller = setInterval(fetchData, POLL_MS);
+</script>
+</body>
+</html>
