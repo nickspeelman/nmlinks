@@ -26,7 +26,6 @@
   .jar{margin:0 auto;width:min(390px,100%)}
   svg{display:block;width:100%;height:auto;filter:drop-shadow(0 12px 14px rgba(70,40,15,.14))}
   .name{font-size:18px;font-weight:850;fill:#fff;letter-spacing:.2px}
-  .name.small{font-size:14px}
   .entries{font-size:11px;font-weight:700;fill:#ffe9e7}
   .controls{display:grid;justify-items:center;gap:.65rem;margin-top:-.25rem}
   button{border:3px solid var(--ink);border-radius:999px;background:var(--label);color:#fff;padding:.78rem 1.55rem;font:800 1.05rem/1 system-ui;box-shadow:0 5px 0 var(--ink);cursor:pointer;transition:transform .12s,box-shadow .12s}
@@ -97,9 +96,50 @@ function normalizeDonors(payload){
   })).filter(item => item.name && Number.isSafeInteger(item.entries) && item.entries > 0);
 }
 
+function splitName(name){
+  const words = name.trim().split(/\s+/);
+  if (words.length === 1 || name.length <= 16) return [name];
+
+  // Try every word boundary and choose the most evenly balanced two lines.
+  let best = [name];
+  let bestScore = Infinity;
+  for (let i = 1; i < words.length; i++){
+    const first = words.slice(0,i).join(' ');
+    const second = words.slice(i).join(' ');
+    const score = Math.max(first.length,second.length) * 2 + Math.abs(first.length-second.length);
+    if (score < bestScore){
+      best = [first,second];
+      bestScore = score;
+    }
+  }
+  return best;
+}
+
 function fitName(name){
-  nameEl.textContent = name;
-  nameEl.classList.toggle('small', name.length > 18);
+  const lines = splitName(name);
+  nameEl.replaceChildren();
+  nameEl.removeAttribute('dominant-baseline');
+  nameEl.setAttribute('aria-label',name);
+
+  const startY = lines.length === 1 ? 269 : 257;
+  const lineGap = 21;
+  const startingSize = lines.length === 1 ? 18 : 16;
+
+  lines.forEach((line,index) => {
+    const tspan = document.createElementNS('http://www.w3.org/2000/svg','tspan');
+    tspan.setAttribute('x','150');
+    tspan.setAttribute('y',String(startY + index * lineGap));
+    tspan.textContent = line;
+    nameEl.appendChild(tspan);
+  });
+
+  // Measure the rendered SVG text and shrink only as much as necessary.
+  let fontSize = startingSize;
+  nameEl.style.fontSize = `${fontSize}px`;
+  while (fontSize > 10 && Array.from(nameEl.children).some(line => line.getComputedTextLength() > 142)){
+    fontSize -= .5;
+    nameEl.style.fontSize = `${fontSize}px`;
+  }
 }
 
 // Uniform integer in [0, max), without modulo bias.
