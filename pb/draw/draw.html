@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Peanut Butter Love | Winner Drawing</title>
+<meta name="robots" content="noindex,nofollow" />
+<style>
+  :root{
+    --pb:#C7773E;
+    --label:#E02C27;
+    --ink:#111;
+    --paper:#fffaf2;
+    --muted:#655d55;
+    --focus:#175cd3;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% 10%,#fff 0,var(--paper) 58%,#f5e7d4 100%);color:var(--ink);font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  body{min-height:100vh;display:grid;place-items:center;padding:1.25rem}
+  main{width:min(680px,100%);text-align:center}
+  h1{margin:.25rem 0;font-size:clamp(1.55rem,5vw,2.35rem)}
+  .intro{margin:.25rem auto 1rem;color:var(--muted);max-width:34rem}
+  .status{min-height:1.5rem;margin:.5rem 0;color:var(--muted);font-size:.95rem}
+  .jar{margin:0 auto;width:min(390px,100%)}
+  svg{display:block;width:100%;height:auto;filter:drop-shadow(0 12px 14px rgba(70,40,15,.14))}
+  .name{font-size:18px;font-weight:850;fill:#fff;letter-spacing:.2px}
+  .name.small{font-size:14px}
+  .entries{font-size:11px;font-weight:700;fill:#ffe9e7}
+  .controls{display:grid;justify-items:center;gap:.65rem;margin-top:-.25rem}
+  button{border:3px solid var(--ink);border-radius:999px;background:var(--label);color:#fff;padding:.78rem 1.55rem;font:800 1.05rem/1 system-ui;box-shadow:0 5px 0 var(--ink);cursor:pointer;transition:transform .12s,box-shadow .12s}
+  button:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 6px 0 var(--ink)}
+  button:active:not(:disabled){transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+  button:focus-visible{outline:4px solid color-mix(in srgb,var(--focus) 45%,transparent);outline-offset:4px}
+  button:disabled{cursor:wait;opacity:.62}
+  .result{min-height:3.6rem;margin:.35rem 0 0;font-size:clamp(1.15rem,4vw,1.45rem);font-weight:800}
+  .result strong{display:block;color:var(--label);font-size:clamp(1.45rem,5vw,2rem)}
+  .fine{margin:.8rem auto 0;max-width:35rem;color:var(--muted);font-size:.8rem;line-height:1.45}
+  [hidden]{display:none!important}
+  @media (prefers-reduced-motion:reduce){button{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Peanut Butter Love Drawing</h1>
+  <p class="intro">Every entry has an equal chance. More entries mean more chances to win.</p>
+  <div class="status" id="status" role="status" aria-live="polite">Loading entries…</div>
+
+  <figure class="jar" aria-label="Peanut butter jar showing raffle participant names">
+    <svg viewBox="0 0 300 420" role="img" aria-labelledby="jarTitle jarDescription">
+      <title id="jarTitle">Peanut Butter Love raffle jar</title>
+      <desc id="jarDescription">Participant names cycle on the jar label until a weighted random winner is selected.</desc>
+      <defs>
+        <clipPath id="jar-cavity"><path d="M60 110Q60 95 80 90H220Q240 95 240 110V360Q240 375 220 380H80Q60 375 60 360Z"/></clipPath>
+        <linearGradient id="pb-shine" x1="0" x2="1">
+          <stop offset="0" stop-color="#b96934"/><stop offset=".42" stop-color="#d38a50"/><stop offset="1" stop-color="#aa5d2d"/>
+        </linearGradient>
+      </defs>
+      <rect x="60" y="105" width="180" height="278" fill="url(#pb-shine)" clip-path="url(#jar-cavity)"/>
+      <path d="M55 91Q45 110 55 125V355Q60 385 100 395H200Q240 385 245 355V125Q255 110 245 91Z" fill="none" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/>
+      <path d="M75 380Q150 405 225 380" fill="none" stroke="var(--ink)" stroke-width="4"/>
+      <ellipse cx="150" cy="55" rx="95" ry="25" fill="var(--label)" stroke="var(--ink)" stroke-width="4"/>
+      <rect x="55" y="55" width="190" height="36" fill="var(--label)" stroke="var(--ink)" stroke-width="4"/>
+      <g stroke="var(--ink)" stroke-width="2">
+        <path d="M65 55V91M77 55V91M89 55V91M101 55V91M113 55V91M125 55V91M137 55V91M149 55V91M161 55V91M173 55V91M185 55V91M197 55V91M209 55V91M221 55V91M233 55V91"/>
+      </g>
+      <rect x="66" y="205" rx="18" width="168" height="120" fill="var(--label)" stroke="var(--ink)" stroke-width="3"/>
+      <text x="150" y="231" text-anchor="middle" font-size="11" font-weight="800" fill="#ffe9e7" letter-spacing="1.5">AND THE WINNER IS</text>
+      <text id="name" class="name" x="150" y="269" text-anchor="middle" dominant-baseline="middle">READY?</text>
+      <text id="entryCount" class="entries" x="150" y="302" text-anchor="middle"></text>
+    </svg>
+  </figure>
+
+  <div class="controls">
+    <button id="draw" type="button" disabled>Draw a winner</button>
+    <p class="result" id="result" aria-live="assertive"></p>
+  </div>
+  <p class="fine" id="fine">The winner is chosen in advance with cryptographically strong browser randomness, weighted by entry count. The name animation is only the reveal.</p>
+</main>
+
+<script>
+const API = 'https://script.google.com/macros/s/AKfycbwQReagIwXeUiDMPv2TZamrb3TYz1nonDjMop0x0uQLFXL27-4LfaXkIr5-3gw_qzS1/exec';
+const statusEl = document.getElementById('status');
+const nameEl = document.getElementById('name');
+const entryCountEl = document.getElementById('entryCount');
+const resultEl = document.getElementById('result');
+const drawButton = document.getElementById('draw');
+let donors = [];
+let totalEntries = 0;
+
+function normalizeDonors(payload){
+  const list = payload.donors || payload.entries || payload.contributors || [];
+  return list.map(item => ({
+    name: String(item.name ?? item.donor ?? item.contributor ?? '').trim(),
+    entries: Math.floor(Number(item.entries ?? item.entry_count ?? item.count ?? 0))
+  })).filter(item => item.name && Number.isSafeInteger(item.entries) && item.entries > 0);
+}
+
+function fitName(name){
+  nameEl.textContent = name;
+  nameEl.classList.toggle('small', name.length > 18);
+}
+
+// Uniform integer in [0, max), without modulo bias.
+function secureRandomInt(max){
+  if (!Number.isSafeInteger(max) || max <= 0 || max > 0xffffffff) throw new Error('Unsupported entry total');
+  const limit = Math.floor(0x100000000 / max) * max;
+  const value = new Uint32Array(1);
+  do crypto.getRandomValues(value); while (value[0] >= limit);
+  return value[0] % max;
+}
+
+function chooseWeightedWinner(){
+  let ticket = secureRandomInt(totalEntries);
+  for (const donor of donors){
+    if (ticket < donor.entries) return donor;
+    ticket -= donor.entries;
+  }
+  throw new Error('Could not select a winner');
+}
+
+function sleep(ms){return new Promise(resolve => setTimeout(resolve,ms))}
+
+async function revealWinner(winner){
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced){
+    const frames = 31;
+    for (let i=0;i<frames;i++){
+      const preview = donors[secureRandomInt(donors.length)];
+      fitName(preview.name);
+      entryCountEl.textContent = '';
+      await sleep(42 + Math.pow(i / frames, 3) * 210);
+    }
+  }
+  fitName(winner.name);
+  entryCountEl.textContent = `${winner.entries.toLocaleString()} ${winner.entries === 1 ? 'entry' : 'entries'}`;
+  resultEl.innerHTML = `Congratulations! <strong></strong>`;
+  resultEl.querySelector('strong').textContent = winner.name;
+}
+
+async function draw(){
+  drawButton.disabled = true;
+  drawButton.textContent = 'Drawing…';
+  resultEl.textContent = '';
+  statusEl.textContent = 'Mixing up all the entries…';
+  try{
+    const winner = chooseWeightedWinner();
+    await revealWinner(winner);
+    statusEl.textContent = `Winner selected from ${totalEntries.toLocaleString()} total entries.`;
+    drawButton.textContent = 'Draw again';
+  }catch(error){
+    console.error(error);
+    statusEl.textContent = 'The drawing could not be completed. Please reload and try again.';
+    drawButton.textContent = 'Try again';
+  }finally{
+    drawButton.disabled = false;
+  }
+}
+
+async function loadEntries(){
+  try{
+    const response = await fetch(`${API}?include=donors&t=${Date.now()}`, {cache:'no-store'});
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const payload = await response.json();
+    donors = normalizeDonors(payload);
+    totalEntries = donors.reduce((sum,item) => sum + item.entries,0);
+    if (!donors.length || !totalEntries) throw new Error('No eligible entries returned');
+    if (totalEntries > 0xffffffff) throw new Error('Entry total is too large');
+    statusEl.textContent = `${donors.length.toLocaleString()} contributors · ${totalEntries.toLocaleString()} total entries`;
+    entryCountEl.textContent = 'Press the button to begin';
+    drawButton.disabled = false;
+  }catch(error){
+    console.error(error);
+    statusEl.textContent = 'Entries are not available yet. The Apps Script endpoint needs its donor-list update.';
+    fitName('NOT READY');
+    entryCountEl.textContent = '';
+  }
+}
+
+drawButton.addEventListener('click', draw);
+loadEntries();
+</script>
+</body>
+</html>
