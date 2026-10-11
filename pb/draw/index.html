@@ -26,7 +26,6 @@
   .jar{margin:0 auto;width:min(390px,100%)}
   svg{display:block;width:100%;height:auto;filter:drop-shadow(0 12px 14px rgba(70,40,15,.14))}
   .name{font-size:18px;font-weight:850;fill:#fff;letter-spacing:.2px}
-  .entries{font-size:11px;font-weight:700;fill:#ffe9e7}
   .controls{display:grid;justify-items:center;gap:.65rem;margin-top:-.25rem}
   button{border:3px solid var(--ink);border-radius:999px;background:var(--label);color:#fff;padding:.78rem 1.55rem;font:800 1.05rem/1 system-ui;box-shadow:0 5px 0 var(--ink);cursor:pointer;transition:transform .12s,box-shadow .12s}
   button:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 6px 0 var(--ink)}
@@ -67,7 +66,6 @@
       <rect x="66" y="205" rx="18" width="168" height="120" fill="var(--label)" stroke="var(--ink)" stroke-width="3"/>
       <text x="150" y="231" text-anchor="middle" font-size="11" font-weight="800" fill="#ffe9e7" letter-spacing="1.5">AND THE WINNER IS</text>
       <text id="name" class="name" x="150" y="269" text-anchor="middle" dominant-baseline="middle">READY?</text>
-      <text id="entryCount" class="entries" x="150" y="302" text-anchor="middle"></text>
     </svg>
   </figure>
 
@@ -82,7 +80,6 @@
 const API = 'https://script.google.com/macros/s/AKfycbwQReagIwXeUiDMPv2TZamrb3TYz1nonDjMop0x0uQLFXL27-4LfaXkIr5-3gw_qzS1/exec';
 const statusEl = document.getElementById('status');
 const nameEl = document.getElementById('name');
-const entryCountEl = document.getElementById('entryCount');
 const resultEl = document.getElementById('result');
 const drawButton = document.getElementById('draw');
 let donors = [];
@@ -169,12 +166,10 @@ async function revealWinner(winner){
     for (let i=0;i<frames;i++){
       const preview = donors[secureRandomInt(donors.length)];
       fitName(preview.name);
-      entryCountEl.textContent = '';
       await sleep(42 + Math.pow(i / frames, 3) * 210);
     }
   }
   fitName(winner.name);
-  entryCountEl.textContent = `${winner.entries.toLocaleString()} ${winner.entries === 1 ? 'entry' : 'entries'}`;
   resultEl.innerHTML = `Congratulations! <strong></strong>`;
   resultEl.querySelector('strong').textContent = winner.name;
 }
@@ -208,13 +203,11 @@ async function loadEntries(){
     if (!donors.length || !totalEntries) throw new Error('No eligible entries returned');
     if (totalEntries > 0xffffffff) throw new Error('Entry total is too large');
     statusEl.textContent = `${donors.length.toLocaleString()} contributors · ${totalEntries.toLocaleString()} total entries`;
-    entryCountEl.textContent = 'Press the button to begin';
     drawButton.disabled = false;
   }catch(error){
     console.error(error);
     statusEl.textContent = 'Entries are not available yet. The Apps Script endpoint needs its donor-list update.';
     fitName('NOT READY');
-    entryCountEl.textContent = '';
   }
 }
 
