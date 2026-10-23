@@ -50,19 +50,52 @@
       align-content: space-between;
     }
 
-    .topbar { display:flex; justify-content:space-between; align-items:center; gap:20px; }
+    .topbar {
+      position: fixed;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      width: min(1180px, calc(100% - 32px));
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:rgba(17,16,15,.9);
+      backdrop-filter:blur(16px);
+      box-shadow:0 12px 40px rgba(0,0,0,.28);
+    }
     .home-link {
+      flex:0 0 auto;
       color: var(--muted);
       text-decoration: none;
-      font-size: .82rem;
+      font-size: .78rem;
       font-weight: 750;
       letter-spacing: .10em;
       text-transform: uppercase;
+      padding:7px 8px;
     }
     .home-link:hover { color: var(--text); }
-    .mini-nav { display:flex; gap:14px; flex-wrap:wrap; }
-    .mini-nav a { color: var(--muted); text-decoration:none; font-size:.9rem; }
-    .mini-nav a:hover { color:var(--text); }
+    .mini-nav {
+      display:flex;
+      gap:4px;
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      scrollbar-width:none;
+    }
+    .mini-nav::-webkit-scrollbar { display:none; }
+    .mini-nav a {
+      flex:0 0 auto;
+      color: var(--muted);
+      text-decoration:none;
+      font-size:.86rem;
+      padding:7px 10px;
+      border-radius:999px;
+    }
+    .mini-nav a:hover { color:var(--text); background:rgba(255,255,255,.06); }
 
     .hero { max-width: 900px; padding-top: 64px; }
     .eyebrow {
@@ -98,7 +131,7 @@
       font-size:.84rem;
     }
 
-    section { padding: 64px 0; border-top:1px solid var(--border); }
+    section { padding: 64px 0; border-top:1px solid var(--border); scroll-margin-top:90px; }
     .section-head { display:grid; grid-template-columns:minmax(0, 1fr) minmax(280px, .85fr); gap:36px; align-items:start; margin-bottom:36px; }
     h2 { margin:0; font-family:Georgia, "Times New Roman", serif; font-size:clamp(2.2rem,5vw,4.2rem); font-weight:500; letter-spacing:-.035em; line-height:1; }
     .section-copy { color:var(--muted); }
@@ -230,8 +263,10 @@
     }
     @media (max-width: 560px) {
       .shell { width:min(100% - 22px, 1180px); }
-      .topbar { align-items:flex-start; }
-      .mini-nav { justify-content:flex-end; }
+      .topbar { width:calc(100% - 18px); top:9px; gap:8px; padding:8px; }
+      .home-link { font-size:.7rem; padding:7px 6px; }
+      .mini-nav { justify-content:flex-start; }
+      .mini-nav a { font-size:.8rem; padding:7px 9px; }
       .gallery { gap:10px; }
       .card, .card.wide { grid-column:span 12; min-height:330px; }
       .species-grid { grid-template-columns:1fr; }
@@ -245,8 +280,10 @@
 <div class="topbar">
 <a class="home-link" href="/">← nmlinks.us</a>
 <nav aria-label="Page sections" class="mini-nav">
+<a href="#shrikes">shrikes</a>
+<a href="#honey-locust">honey locust</a>
 <a href="#lichens">lichens</a>
-<a href="#reference">references</a>
+<a href="#reference">visual references</a>
 </nav>
 </div>
 <div class="hero">
@@ -262,7 +299,7 @@
 </div>
 </header>
 <main>
-<section>
+<section id="shrikes">
 <div class="shell section-head">
 <div>
 <p class="eyebrow">01 / the bird</p>
@@ -275,7 +312,7 @@
 </div>
 </div>
 </section>
-<section>
+<section id="honey-locust">
 <div class="shell section-head">
 <div>
 <p class="eyebrow">02 / the tree</p>
