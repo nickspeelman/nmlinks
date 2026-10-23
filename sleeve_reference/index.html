@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#171513" name="theme-color"/>
+<title>Sleeve Reference — Shrike / Honey Locust / Lichen</title>
+<meta content="A visual reference board for a tattoo sleeve concept built around a loggerhead shrike, honey locust thorns, and colorful lichens." name="description"/>
+<link href="https://nmlinks.us/sleeve_reference/" rel="canonical"/>
+<style>
+    :root {
+      color-scheme: dark;
+      --bg: #11100f;
+      --panel: #1b1917;
+      --panel-2: #23201d;
+      --text: #f2eee7;
+      --muted: #b9afa4;
+      --faint: #7f766d;
+      --border: rgba(255,255,255,.11);
+      --rust: #bb5c3d;
+      --gold: #d7b83d;
+      --lichen: #a7b774;
+      --bone: #ddd2c2;
+      --shadow: 0 22px 70px rgba(0,0,0,.35);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(187,92,61,.14), transparent 30rem),
+        radial-gradient(circle at 88% 28%, rgba(167,183,116,.10), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .shell { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+
+    header {
+      padding: 26px 0 72px;
+      min-height: 72vh;
+      display: grid;
+      align-content: space-between;
+    }
+
+    .topbar { display:flex; justify-content:space-between; align-items:center; gap:20px; }
+    .home-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 750;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+    }
+    .home-link:hover { color: var(--text); }
+    .mini-nav { display:flex; gap:14px; flex-wrap:wrap; }
+    .mini-nav a { color: var(--muted); text-decoration:none; font-size:.9rem; }
+    .mini-nav a:hover { color:var(--text); }
+
+    .hero { max-width: 900px; padding-top: 64px; }
+    .eyebrow {
+      margin:0 0 14px;
+      color:var(--rust);
+      font-size:.78rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.15em;
+    }
+    h1 {
+      margin:0;
+      max-width: 11ch;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.4rem, 10vw, 8rem);
+      font-weight:500;
+      line-height:.88;
+      letter-spacing:-.055em;
+    }
+    .dek {
+      max-width: 720px;
+      margin: 28px 0 0;
+      color:var(--muted);
+      font-size:clamp(1.05rem, 2vw, 1.35rem);
+    }
+    .hero-notes { display:flex; gap:10px; flex-wrap:wrap; margin-top:28px; }
+    .tag {
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.035);
+      border-radius:999px;
+      padding:7px 11px;
+      color:var(--muted);
+      font-size:.84rem;
+    }
+
+    section { padding: 64px 0; border-top:1px solid var(--border); }
+    .section-head { display:grid; grid-template-columns:minmax(0, 1fr) minmax(280px, .85fr); gap:36px; align-items:start; margin-bottom:36px; }
+    h2 { margin:0; font-family:Georgia, "Times New Roman", serif; font-size:clamp(2.2rem,5vw,4.2rem); font-weight:500; letter-spacing:-.035em; line-height:1; }
+    .section-copy { color:var(--muted); }
+    .section-copy p:first-child { margin-top:0; }
+    .fact {
+      margin-top:18px;
+      padding:16px 18px;
+      border-left:3px solid var(--gold);
+      background:rgba(215,184,61,.06);
+      color:var(--bone);
+    }
+
+    .controls {
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin: 0 0 24px;
+      position:sticky;
+      top:10px;
+      z-index:8;
+      padding:10px;
+      border:1px solid var(--border);
+      background:rgba(17,16,15,.88);
+      backdrop-filter:blur(16px);
+      border-radius:16px;
+      width:max-content;
+      max-width:100%;
+    }
+    .filter {
+      appearance:none;
+      border:1px solid transparent;
+      background:transparent;
+      color:var(--muted);
+      border-radius:999px;
+      padding:9px 13px;
+      font:inherit;
+      font-size:.88rem;
+      cursor:pointer;
+    }
+    .filter:hover { color:var(--text); }
+    .filter.active { background:var(--text); color:#171513; }
+
+    .gallery {
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:14px;
+    }
+    .card {
+      grid-column:span 4;
+      position:relative;
+      overflow:hidden;
+      min-height:320px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:var(--panel);
+      box-shadow:var(--shadow);
+      cursor:zoom-in;
+      isolation:isolate;
+    }
+    .card.wide { grid-column:span 8; }
+    .card.tall { min-height:430px; }
+    .card[hidden] { display:none; }
+    .card img {
+      width:100%; height:100%; object-fit:cover; position:absolute; inset:0;
+      filter:saturate(.92) contrast(1.02);
+      transition:transform .35s ease, filter .35s ease;
+    }
+    .card:hover img { transform:scale(1.025); filter:saturate(1.08) contrast(1.04); }
+    .shade { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.88), rgba(0,0,0,.1) 58%, transparent); z-index:1; }
+    .caption { position:absolute; inset:auto 0 0; padding:18px; z-index:2; }
+    .caption .kind { color:var(--gold); text-transform:uppercase; font-size:.69rem; letter-spacing:.13em; font-weight:800; }
+    .caption h3 { margin:4px 0 2px; font-size:1.15rem; }
+    .caption p { margin:0; color:#d6cec4; font-size:.86rem; }
+
+    .species-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+    .species {
+      border:1px solid var(--border);
+      background:var(--panel);
+      border-radius:16px;
+      padding:18px;
+    }
+    .swatch { width:38px; height:5px; border-radius:999px; margin-bottom:17px; }
+    .species h3 { margin:0 0 4px; font-size:1rem; }
+    .species em { color:var(--muted); font-size:.86rem; }
+    .species p { color:var(--muted); font-size:.88rem; margin:12px 0 0; }
+
+    .source-list { display:grid; gap:10px; }
+    .source-link {
+      display:flex; justify-content:space-between; gap:20px; align-items:center;
+      border:1px solid var(--border); border-radius:14px; padding:15px 16px;
+      color:var(--muted); text-decoration:none; background:rgba(255,255,255,.025);
+    }
+    .source-link:hover { color:var(--text); border-color:rgba(255,255,255,.22); }
+    .source-link strong { color:var(--text); display:block; font-size:.92rem; }
+    .source-link small { display:block; margin-top:2px; }
+
+    footer { padding:34px 0 52px; color:var(--faint); font-size:.82rem; border-top:1px solid var(--border); }
+
+    dialog {
+      width:min(1040px, calc(100% - 24px));
+      max-height:92vh;
+      padding:0;
+      border:1px solid var(--border);
+      border-radius:20px;
+      background:#151311;
+      color:var(--text);
+      box-shadow:0 30px 120px rgba(0,0,0,.7);
+      overflow:hidden;
+    }
+    dialog::backdrop { background:rgba(0,0,0,.78); backdrop-filter:blur(5px); }
+    .lightbox-grid { display:grid; grid-template-columns:minmax(0,1.6fr) minmax(270px,.7fr); max-height:92vh; }
+    .lightbox-image { min-height:420px; background:#090909; display:grid; place-items:center; overflow:auto; }
+    .lightbox-image img { max-height:88vh; width:100%; object-fit:contain; }
+    .lightbox-copy { padding:28px; overflow:auto; }
+    .lightbox-copy h3 { margin:6px 0 10px; font-size:1.65rem; }
+    .lightbox-copy p { color:var(--muted); }
+    .lightbox-copy a { color:var(--gold); }
+    .close {
+      float:right; border:1px solid var(--border); background:transparent; color:var(--text);
+      border-radius:999px; width:36px; height:36px; cursor:pointer; font-size:1.1rem;
+    }
+
+    @media (max-width: 850px) {
+      header { min-height:auto; padding-bottom:48px; }
+      .section-head, .lightbox-grid { grid-template-columns:1fr; }
+      .card, .card.wide { grid-column:span 6; }
+      .species-grid { grid-template-columns:repeat(2,1fr); }
+      .lightbox-image { min-height:280px; }
+    }
+    @media (max-width: 560px) {
+      .shell { width:min(100% - 22px, 1180px); }
+      .topbar { align-items:flex-start; }
+      .mini-nav { justify-content:flex-end; }
+      .gallery { gap:10px; }
+      .card, .card.wide { grid-column:span 12; min-height:330px; }
+      .species-grid { grid-template-columns:1fr; }
+      section { padding:48px 0; }
+      .controls { width:100%; overflow:auto; flex-wrap:nowrap; }
+    }
+  </style>
+</head>
+<body>
+<header class="shell">
+<div class="topbar">
+<a class="home-link" href="/">← nmlinks.us</a>
+<nav aria-label="Page sections" class="mini-nav">
+<a href="#lichens">lichens</a>
+<a href="#reference">references</a>
+</nav>
+</div>
+<div class="hero">
+<p class="eyebrow">Sleeve reference / working board</p>
+<h1>Butcherbird, thorns &amp; lichen.</h1>
+<p class="dek">Reference material for a sleeve section combining a loggerhead shrike, honey locust, and bark lichens. The page focuses on anatomy, hunting behavior, thorn structure, bark texture, and lichen color.</p>
+<div aria-label="Concept keywords" class="hero-notes">
+<span class="tag">predatory songbird</span>
+<span class="tag">natural impaling site</span>
+<span class="tag">yellow / orange / green lichen</span>
+<span class="tag">bark texture + color</span>
+</div>
+</div>
+</header>
+<main>
+<section>
+<div class="shell section-head">
+<div>
+<p class="eyebrow">01 / the bird</p>
+<h2>Shrike hunting and impaling behavior.</h2>
+</div>
+<div class="section-copy">
+<p>Loggerhead shrikes hunt from exposed perches and take insects, mice, lizards, small birds, and other prey. They have a hooked bill but relatively weak songbird feet rather than raptorial talons.</p>
+<p>Larger prey may be <strong>impaled on thorns, sharp twigs, or barbed wire</strong>, or wedged into branch forks. These food caches are called <strong>larders</strong>. They are used for feeding and storage and may also play a role in mate attraction.</p>
+<div class="fact">U.S. Fish &amp; Wildlife Service specifically lists <strong>honey locust</strong> as an example of a thorny tree used by loggerhead shrikes for impaling prey.</div>
+</div>
+</div>
+</section>
+<section>
+<div class="shell section-head">
+<div>
+<p class="eyebrow">02 / the tree</p>
+<h2>Honey locust structure and thorns.</h2>
+</div>
+<div class="section-copy">
+<p>Wild honey locust (<em>Gleditsia triacanthos</em>) can produce long, rigid, branching thorns directly from trunks and limbs. Mature bark forms rough gray-brown ridges. The tree also has fine compound foliage and long, often twisted seedpods.</p>
+<p>Shrikes do not depend on honey locust specifically. They use many thorny shrubs, trees, and artificial sharp points. Honey locust provides suitable rigid thorns and occurs in open habitats used by loggerhead shrikes.</p>
+</div>
+</div>
+</section>
+<section id="lichens">
+<div class="shell">
+<div class="section-head">
+<div>
+<p class="eyebrow">03 / lichen notes</p>
+<h2>Lichens on honey locust.</h2>
+</div>
+<div class="section-copy">
+<p>Lichens are symbiotic organisms in which a fungus forms the main body and a photosynthetic partner — an alga and/or cyanobacterium — supplies energy. Bark-growing lichens use the tree primarily as a substrate and are <strong>not parasites drawing nutrients from the tree</strong>.</p>
+<p>A Chicago-area survey recorded <strong>20 lichen species on honey locust</strong>, including the species highlighted below. These provide documented yellow, orange, green, and gray color references for honey-locust bark.</p>
+</div>
+</div>
+<div class="species-grid">
+<article class="species"><div class="swatch" style="background:#dfc830"></div><h3>Candleflame / lemon</h3><em>Candelaria concolor</em><p>Lemon to gold; small, frilly foliose patches.</p></article>
+<article class="species"><div class="swatch" style="background:#aeb776"></div><h3>Common greenshield</h3><em>Flavoparmelia caperata</em><p>Broad yellow-green lobes that can form relatively large patches.</p></article>
+<article class="species"><div class="swatch" style="background:#d98a2d"></div><h3>Hooded sunburst</h3><em>Xanthomendoza fallax</em><p>Yellow to orange foliose growth with a warmer color range.</p></article>
+<article class="species"><div class="swatch" style="background:linear-gradient(90deg,#777b68 0 55%,#d66a2c 55%)"></div><h3>Orange-cored shadow</h3><em>Phaeophyscia rubropulchra</em><p>Gray-green outer surface with a vivid orange-red inner layer.</p></article>
+<article class="species"><div class="swatch" style="background:#c9cbc0"></div><h3>Mealy rosette</h3><em>Physcia millegrana</em><p>Pale gray foliose rosettes that contrast with darker bark.</p></article>
+</div>
+</div>
+</section>
+<section id="reference">
+<div class="shell">
+<div class="section-head">
+<div>
+<p class="eyebrow">04 / visual references</p>
+<h2>Visual references.</h2>
+</div>
+<div class="section-copy"><p>Filter by subject. Shrike portraits are separated from hunting and larder references. The hunting/larder examples include several shrike species to show the range of impaling substrates, prey sizes, and body positions.</p></div>
+</div>
+<div aria-label="Filter reference images" class="controls" role="group">
+<button class="filter active" data-filter="all">All</button>
+<button class="filter" data-filter="shrike">Shrikes</button>
+<button class="filter" data-filter="larder">Hunting / larders</button>
+<button class="filter" data-filter="locust">Honey locust</button>
+<button class="filter" data-filter="lichen">Lichens</button>
+</div>
+<div class="gallery" id="gallery"><article class="card wide tall" data-category="shrike" data-description="Full-body reference showing the compact proportions, gray upperparts, pale underside, black mask, black wings, white wing patch, and hooked bill." data-source="https://commons.wikimedia.org/wiki/File:Shrikes_known_for_impaling_their_prey_on_thorns,_barbed_wire,_and_branches,_which_is_what_gave_them_their_nickname,_the_(cdb989c0-daad-42d8-bab4-0d3340e73892).jpg" data-title="Loggerhead shrike — full body"><img alt="Loggerhead shrike — full body" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Shrikes%20known%20for%20impaling%20their%20prey%20on%20thorns,%20barbed%20wire,%20and%20branches,%20which%20is%20what%20gave%20them%20their%20nickname,%20the%20(cdb989c0-daad-42d8-bab4-0d3340e73892).jpg?width=1500"/><span class="shade"></span><div class="caption"><span class="kind">Shrike</span><h3>Full body + mask</h3><p>Loggerhead shrike</p></div></article><article class="card tall" data-category="shrike" data-description="A vertical profile useful for head shape, bill depth, eye-mask placement, chest, and tail proportions." data-source="https://commons.wikimedia.org/wiki/File:Loggerhead_Shrike_(Lanius_ludovicianus).jpg" data-title="Loggerhead shrike — vertical profile"><img alt="Loggerhead shrike — vertical profile" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Loggerhead%20Shrike%20(Lanius%20ludovicianus).jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Shrike</span><h3>Profile anatomy</h3><p>Loggerhead shrike</p></div></article><article class="card wide" data-category="shrike" data-description="A horizontal perched pose showing the bird at rest on a narrow branch, with a clear view of the wing and tail." data-source="https://commons.wikimedia.org/wiki/File:Perched_Loggerhead_Shrike.jpg" data-title="Loggerhead shrike — open perch"><img alt="Loggerhead shrike — open perch" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Perched%20Loggerhead%20Shrike.jpg?width=1500"/><span class="shade"></span><div class="caption"><span class="kind">Shrike</span><h3>Perched posture</h3><p>Loggerhead shrike</p></div></article><article class="card" data-category="shrike" data-description="Side view on a natural branch; useful for foot placement, balance, tail angle, and the relationship between the head and body." data-source="https://commons.wikimedia.org/wiki/File:Loggerhead_Shrike_Willow_Tank_Portal_AZ_2016-08-09_09-34-03_(32864731387).jpg" data-title="Loggerhead shrike — branch posture"><img alt="Loggerhead shrike — branch posture" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Loggerhead%20Shrike%20Willow%20Tank%20Portal%20AZ%202016-08-09%2009-34-03%20(32864731387).jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Shrike</span><h3>Branch posture</h3><p>Loggerhead shrike</p></div></article><article class="card" data-category="shrike" data-description="A more frontal reference for the mask, breast, stance, and compact body shape." data-source="https://commons.wikimedia.org/wiki/File:Loggerhead_shrike_triangle_ranch_July_2023_DSC_5839.jpg" data-title="Loggerhead shrike — frontal angle"><img alt="Loggerhead shrike — frontal angle" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Loggerhead%20shrike%20triangle%20ranch%20July%202023%20DSC%205839.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Shrike</span><h3>Frontal angle</h3><p>Loggerhead shrike</p></div></article><article class="card" data-category="shrike" data-description="Additional side-view plumage and proportion reference." data-source="https://commons.wikimedia.org/wiki/File:Loggerhead_Shrike_florida_RWD2.jpg" data-title="Loggerhead shrike — alternate side view"><img alt="Loggerhead shrike — alternate side view" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Loggerhead%20Shrike%20florida%20RWD2.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Shrike</span><h3>Side view</h3><p>Loggerhead shrike</p></div></article><article class="card tall" data-category="shrike" data-description="Reference for size, posture, and juvenile/adult differences." data-source="https://commons.wikimedia.org/wiki/File:Loggerhead_Shrike_w_fledgling.jpg" data-title="Loggerhead shrike — adult and fledgling"><img alt="Loggerhead shrike — adult and fledgling" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Loggerhead%20Shrike%20w%20fledgling.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Shrike</span><h3>Adult + fledgling</h3><p>Loggerhead shrike</p></div></article><article class="card tall" data-category="larder" data-description="A large beetle impaled on a natural thorn. Shows how prey can be anchored perpendicular to the thorn and left in place." data-source="https://commons.wikimedia.org/wiki/File:Julodis_viridipes_(Buprestidae,_Julodinae)_impaled_on_the_thorn_of_Lycium_cinereum_(Solanaceae)_by_a_shrike_(37281944961).jpg" data-title="Shrike larder — beetle on thorn"><img alt="Shrike larder — beetle on thorn" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Julodis%20viridipes%20(Buprestidae,%20Julodinae)%20impaled%20on%20the%20thorn%20of%20Lycium%20cinereum%20(Solanaceae)%20by%20a%20shrike%20(37281944961).jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Hunting / larder</span><h3>Beetle on thorn</h3><p>Impaling behavior</p></div></article><article class="card" data-category="larder" data-description="Small-prey reference showing an insect fixed to a thorn." data-source="https://commons.wikimedia.org/wiki/File:Butchbirdprey.jpg" data-title="Shrike larder — bee on thorn"><img alt="Shrike larder — bee on thorn" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Butchbirdprey.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Hunting / larder</span><h3>Small insect cache</h3><p>Impaling behavior</p></div></article><article class="card wide" data-category="larder" data-description="Loggerhead shrike actively impaling a large insect on a barbed-wire point. Useful for the mechanics of the behavior and the bird/prey scale relationship." data-source="https://commons.wikimedia.org/wiki/File:Loggerhead_Shrike_-_Butcher_Bird_(16539220801).jpg" data-title="Loggerhead shrike — impaling on barbed wire"><img alt="Loggerhead shrike — impaling on barbed wire" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Loggerhead%20Shrike%20-%20Butcher%20Bird%20(16539220801).jpg?width=1500"/><span class="shade"></span><div class="caption"><span class="kind">Hunting / larder</span><h3>Active impaling</h3><p>Loggerhead shrike</p></div></article><article class="card wide" data-category="larder" data-description="A shrike placing a grasshopper onto a thorn, showing the active impaling posture." data-source="https://commons.wikimedia.org/wiki/File:A_Bay_Backed_Shrike_Impaling_a_Grasshopper_onto_a_Thorn_(49587690377).jpg" data-title="Bay-backed shrike — grasshopper on thorn"><img alt="Bay-backed shrike — grasshopper on thorn" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/A%20Bay%20Backed%20Shrike%20Impaling%20a%20Grasshopper%20onto%20a%20Thorn%20(49587690377).jpg?width=1500"/><span class="shade"></span><div class="caption"><span class="kind">Hunting / larder</span><h3>Grasshopper + thorn</h3><p>Shrike impaling behavior</p></div></article><article class="card tall" data-category="larder" data-description="Lizard impaled on a branch by a Southern Shrike. Useful for larger vertebrate prey scale and how the body hangs from the impaling point." data-source="https://commons.wikimedia.org/wiki/File:Shrike_prey_lizard.jpg" data-title="Shrike larder — lizard"><img alt="Shrike larder — lizard" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Shrike%20prey%20lizard.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Hunting / larder</span><h3>Lizard cache</h3><p>Shrike larder</p></div></article><article class="card tall" data-category="larder" data-description="A vole hung by a shrike as a food cache. Shows larger mammal prey and the irregular body position typical of larders." data-source="https://commons.wikimedia.org/wiki/File:A_Butcher_Bird's_Work_(16648126409).jpg" data-title="Shrike larder — vole"><img alt="Shrike larder — vole" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/A%20Butcher%20Bird's%20Work%20(16648126409).jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Hunting / larder</span><h3>Vole cache</h3><p>Shrike larder</p></div></article><article class="card" data-category="larder" data-description="Half-eaten insect impaled on barbed wire by a Southern Fiscal. Shows an artificial impaling substrate and partially consumed prey." data-source="https://commons.wikimedia.org/wiki/File:Insect_impaled_Fiscal.jpg" data-title="Southern Fiscal — insect on barbed wire"><img alt="Southern Fiscal — insect on barbed wire" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Insect%20impaled%20Fiscal.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Hunting / larder</span><h3>Barbed-wire cache</h3><p>Shrike larder</p></div></article><article class="card tall" data-category="larder" data-description="Cape skink impaled on a thorn by a Common Fiscal. Another reference for vertebrate prey and a natural thorn substrate." data-source="https://commons.wikimedia.org/wiki/File:MabuyaCapensisImpaled_inAcaciaXanthophloea.JPG" data-title="Fiscal shrike — skink on thorn"><img alt="Fiscal shrike — skink on thorn" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/MabuyaCapensisImpaled%20inAcaciaXanthophloea.JPG?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Hunting / larder</span><h3>Skink on thorn</h3><p>Shrike larder</p></div></article><article class="card wide tall" data-category="locust" data-description="Long, rigid, branching thorns growing directly from the trunk." data-source="https://commons.wikimedia.org/wiki/File:HoneyLocustThorn.JPG" data-title="Honey locust — branching trunk thorns"><img alt="Honey locust — branching trunk thorns" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/HoneyLocustThorn.JPG?width=1500"/><span class="shade"></span><div class="caption"><span class="kind">Honey locust</span><h3>Branching trunk thorns</h3><p>Honey locust</p></div></article><article class="card tall" data-category="locust" data-description="Dense cluster of mature trunk thorns showing repeated branching and variation in length." data-source="https://commons.wikimedia.org/wiki/File:Gleditsia_triacanthos_5Dsr_1974.jpg" data-title="Honey locust — thorn cluster"><img alt="Honey locust — thorn cluster" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Gleditsia%20triacanthos%205Dsr%201974.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Honey locust</span><h3>Thorn cluster</h3><p>Honey locust</p></div></article><article class="card" data-category="locust" data-description="Close reference showing thorn bases emerging from mature bark." data-source="https://commons.wikimedia.org/wiki/File:Gleditsia_thorns_and_bark.jpg" data-title="Honey locust — thorns and bark"><img alt="Honey locust — thorns and bark" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Gleditsia%20thorns%20and%20bark.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Honey locust</span><h3>Thorn bases + bark</h3><p>Honey locust</p></div></article><article class="card wide" data-category="locust" data-description="Another view of rigid trunk thorns and bark texture." data-source="https://commons.wikimedia.org/wiki/File:Gleditsis-triacanthos-thorns.JPG" data-title="Honey locust — alternate thorn structure"><img alt="Honey locust — alternate thorn structure" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Gleditsis-triacanthos-thorns.JPG?width=1500"/><span class="shade"></span><div class="caption"><span class="kind">Honey locust</span><h3>Thorn structure</h3><p>Honey locust</p></div></article><article class="card tall" data-category="locust" data-description="Mature bark develops long ridges and plates in gray-brown tones." data-source="https://commons.wikimedia.org/wiki/File:Gleditsia_triacanthos_bark.jpg" data-title="Honey locust — mature bark"><img alt="Honey locust — mature bark" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Gleditsia%20triacanthos%20bark.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Honey locust</span><h3>Mature bark</h3><p>Honey locust</p></div></article><article class="card" data-category="locust" data-description="Close view of the relationship between the bark surface and thorn growth." data-source="https://commons.wikimedia.org/wiki/File:Honey_locust_thorns.jpg" data-title="Honey locust — thorn and bark close-up"><img alt="Honey locust — thorn and bark close-up" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Honey%20locust%20thorns.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Honey locust</span><h3>Bark + thorn detail</h3><p>Honey locust</p></div></article><article class="card wide" data-category="locust" data-description="Long, dark seedpods on the tree. Pods can be straight to strongly curved or twisted." data-source="https://commons.wikimedia.org/wiki/File:Gleditsia_triacanthos_pods_on_tree.jpg" data-title="Honey locust — seedpods"><img alt="Honey locust — seedpods" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Gleditsia%20triacanthos%20pods%20on%20tree.jpg?width=1500"/><span class="shade"></span><div class="caption"><span class="kind">Honey locust</span><h3>Seedpods</h3><p>Honey locust</p></div></article><article class="card tall" data-category="locust" data-description="Compound leaves provide a finer texture than the heavy bark and thorns." data-source="https://commons.wikimedia.org/wiki/File:Leaves_8054.jpg" data-title="Honey locust — foliage"><img alt="Honey locust — foliage" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Leaves%208054.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Honey locust</span><h3>Compound foliage</h3><p>Honey locust</p></div></article><article class="card tall" data-category="lichen" data-description="Bright lemon-yellow foliose lichen. Candelaria concolor was recorded on honey locust in the cited Chicago-area survey." data-source="https://commons.wikimedia.org/wiki/File:Candelaria_concolor_(Candelariaceae)_(Candleflame_lichen),_Elst_(GE),_the_Netherlands.jpg" data-title="Candelaria concolor — bark growth"><img alt="Candelaria concolor — bark growth" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Candelaria%20concolor%20(Candelariaceae)%20(Candleflame%20lichen),%20Elst%20(GE),%20the%20Netherlands.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Lichen</span><h3>Candleflame yellow</h3><p><em>Candelaria concolor</em></p></div></article><article class="card" data-category="lichen" data-description="Close specimen view showing the small yellow lobes and granular margins." data-source="https://commons.wikimedia.org/wiki/File:Candelaria_concolor.jpg" data-title="Candelaria concolor — macro detail"><img alt="Candelaria concolor — macro detail" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Candelaria%20concolor.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Lichen</span><h3>Candelaria detail</h3><p><em>Candelaria concolor</em></p></div></article><article class="card wide tall" data-category="lichen" data-description="Common greenshield forms broad yellow-green lobes and can cover relatively large areas of bark." data-source="https://commons.wikimedia.org/wiki/File:Common_Greenshield_Lichen_-_Flavoparmelia_caperata_(26782053927).jpg" data-title="Flavoparmelia caperata — broad patch"><img alt="Flavoparmelia caperata — broad patch" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Common%20Greenshield%20Lichen%20-%20Flavoparmelia%20caperata%20(26782053927).jpg?width=1500"/><span class="shade"></span><div class="caption"><span class="kind">Lichen</span><h3>Broad greenshield patch</h3><p><em>Flavoparmelia caperata</em></p></div></article><article class="card wide" data-category="lichen" data-description="Alternate close reference for the broad foliose lobes and gray-green/yellow-green color." data-source="https://commons.wikimedia.org/wiki/File:Flavoparmelia_caperata_-_lichen_-_Caperatflechte.jpg" data-title="Flavoparmelia caperata — lobe detail"><img alt="Flavoparmelia caperata — lobe detail" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Flavoparmelia%20caperata%20-%20lichen%20-%20Caperatflechte.jpg?width=1500"/><span class="shade"></span><div class="caption"><span class="kind">Lichen</span><h3>Greenshield lobe detail</h3><p><em>Flavoparmelia caperata</em></p></div></article><article class="card" data-category="lichen" data-description="Yellow-to-orange foliose growth. Xanthomendoza fallax was recorded on honey locust in the cited survey." data-source="https://commons.wikimedia.org/wiki/File:Hooded_Sunburst_Lichen_(Xanthomendoza_fallax)_-_Guelph,_Ontario_2020-04-08.jpg" data-title="Xanthomendoza fallax — hooded sunburst"><img alt="Xanthomendoza fallax — hooded sunburst" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Hooded%20Sunburst%20Lichen%20(Xanthomendoza%20fallax)%20-%20Guelph,%20Ontario%202020-04-08.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Lichen</span><h3>Sunburst yellow-orange</h3><p><em>Xanthomendoza fallax</em></p></div></article><article class="card" data-category="lichen" data-description="Gray-green outer thallus with orange-red coloration in the medulla. Recorded on honey locust in the cited survey." data-source="https://commons.wikimedia.org/wiki/File:Phaeophyscia_rubropulchra-1.jpg" data-title="Phaeophyscia rubropulchra — orange-cored shadow"><img alt="Phaeophyscia rubropulchra — orange-cored shadow" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Phaeophyscia%20rubropulchra-1.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Lichen</span><h3>Orange-cored shadow</h3><p><em>Phaeophyscia rubropulchra</em></p></div></article><article class="card" data-category="lichen" data-description="Pale gray foliose rosettes with fine lobes. Recorded on honey locust in the cited survey." data-source="https://commons.wikimedia.org/wiki/File:Physcia_millegrana-1.jpg" data-title="Physcia millegrana — pale rosettes"><img alt="Physcia millegrana — pale rosettes" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Physcia%20millegrana-1.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Lichen</span><h3>Pale gray rosettes</h3><p><em>Physcia millegrana</em></p></div></article><article class="card" data-category="lichen" data-description="Gray foliose lichen with a networked, ridged surface. Parmelia sulcata was recorded on honey locust in the cited survey." data-source="https://commons.wikimedia.org/wiki/File:Parmelia_sulcata.jpg" data-title="Parmelia sulcata — hammered shield"><img alt="Parmelia sulcata — hammered shield" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Parmelia%20sulcata.jpg?width=1100"/><span class="shade"></span><div class="caption"><span class="kind">Lichen</span><h3>Hammered shield</h3><p><em>Parmelia sulcata</em></p></div></article><article class="card wide" data-category="lichen" data-description="Green-gray foliose lichen with pale spotting and powdery reproductive structures near the lobe edges. Recorded on honey locust in the cited survey." data-source="https://commons.wikimedia.org/wiki/File:Flavopunctelia_soredica_138865.jpg" data-title="Flavopunctelia soredica — powder-edged speckled greenshield"><img alt="Flavopunctelia soredica — powder-edged speckled greenshield" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Flavopunctelia%20soredica%20138865.jpg?width=1500"/><span class="shade"></span><div class="caption"><span class="kind">Lichen</span><h3>Powder-edged greenshield</h3><p><em>Flavopunctelia soredica</em></p></div></article><article class="card wide" data-category="lichen" data-description="Yellow-green to gray-green foliose lichen with pale speckling. Recorded on honey locust in the cited survey." data-source="https://commons.wikimedia.org/wiki/File:Speckled_Greenshield_-_Flavopunctelia_flaventior_(29838916458).jpg" data-title="Flavopunctelia flaventior — speckled greenshield"><img alt="Flavopunctelia flaventior — speckled greenshield" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Speckled%20Greenshield%20-%20Flavopunctelia%20flaventior%20(29838916458).jpg?width=1500"/><span class="shade"></span><div class="caption"><span class="kind">Lichen</span><h3>Speckled greenshield</h3><p><em>Flavopunctelia flaventior</em></p></div></article></div>
+</div>
+</section>
+<section id="sources">
+<div class="shell section-head">
+<div>
+<p class="eyebrow">05 / sources</p>
+<h2>Sources.</h2>
+</div>
+<div class="source-list">
+<a class="source-link" href="https://www.fws.gov/story/loggerhead-shrikes-tales-larder" rel="noopener" target="_blank"><span><strong>U.S. Fish &amp; Wildlife Service</strong><small>Loggerhead shrikes, larders, and honey locust as an impaling substrate</small></span><span>↗</span></a>
+<a class="source-link" href="https://www.allaboutbirds.org/guide/Loggerhead_Shrike/lifehistory" rel="noopener" target="_blank"><span><strong>Cornell Lab of Ornithology</strong><small>Hunting behavior, thorny habitat, prey caches, breeding</small></span><span>↗</span></a>
+<a class="source-link" href="https://mortonarb.org/plant-and-protect/trees-and-plants/honey-locust/" rel="noopener" target="_blank"><span><strong>Morton Arboretum</strong><small>Honey-locust bark, thorns, range, foliage, pods</small></span><span>↗</span></a>
+<a class="source-link" href="https://ilacadofsci.com/wp-content/uploads/2013/04/098-12MS2422-print.pdf" rel="noopener" target="_blank"><span><strong>Illinois State Academy of Science</strong><small>Survey documenting 20 lichen species on honey locust</small></span><span>↗</span></a>
+<a class="source-link" href="https://www.niehs.nih.gov/health/kids/topics/natural-world/wildlife/plants/lichen" rel="noopener" target="_blank"><span><strong>National Institute of Environmental Health Sciences</strong><small>What lichens are and why bark-growing lichens are not tree parasites</small></span><span>↗</span></a>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="shell">Reference material for tattoo consultation. Image source pages are linked in each enlarged image; natural-history sources are listed on this page.</div>
+</footer>
+<dialog id="lightbox">
+<div class="lightbox-grid">
+<div class="lightbox-image"><img alt="" id="lightbox-img"/></div>
+<div class="lightbox-copy">
+<button aria-label="Close" class="close" id="close">×</button>
+<p class="eyebrow" id="lightbox-kind">Reference</p>
+<h3 id="lightbox-title"></h3>
+<p id="lightbox-description"></p>
+<p><a href="#" id="lightbox-source" rel="noopener" target="_blank">Open source / credit page ↗</a></p>
+</div>
+</div>
+</dialog>
+<script>
+    const filters = [...document.querySelectorAll('.filter')];
+    const cards = [...document.querySelectorAll('.card')];
+    const dialog = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbTitle = document.getElementById('lightbox-title');
+    const lbDesc = document.getElementById('lightbox-description');
+    const lbKind = document.getElementById('lightbox-kind');
+    const lbSource = document.getElementById('lightbox-source');
+
+    filters.forEach(button => button.addEventListener('click', () => {
+      filters.forEach(b => b.classList.remove('active'));
+      button.classList.add('active');
+      const filter = button.dataset.filter;
+      cards.forEach(card => {
+        const cat = card.dataset.category;
+        card.hidden = filter !== 'all' && cat !== filter;
+      });
+    }));
+
+    cards.forEach(card => card.addEventListener('click', () => {
+      const image = card.querySelector('img');
+      lbImg.src = image.src;
+      lbImg.alt = image.alt;
+      lbTitle.textContent = card.dataset.title;
+      lbDesc.textContent = card.dataset.description;
+      lbKind.textContent = card.dataset.category === 'locust' ? 'Honey locust' : card.dataset.category;
+      lbSource.href = card.dataset.source;
+      dialog.showModal();
+    }));
+
+    document.getElementById('close').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', event => {
+      if (event.target === dialog) dialog.close();
+    });
+    window.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && dialog.open) dialog.close();
+    });
+  </script>
+</body>
+</html>
